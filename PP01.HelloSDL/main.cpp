@@ -12,6 +12,7 @@ int main(int argc, char*args[]) {
 			g_pRenderer = SDL_CreateRenderer(g_pWindow, -1, 0);
 		}
 	}
+
 	else return 1;
 	
 
