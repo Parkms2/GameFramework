@@ -13,13 +13,11 @@ public:
 	void handleEventes();
 	void clean();
 	bool runnung() { return m_bRunning; }
+
 	bool m_bRunning;
 private:
 	SDL_Window * m_pWindow;
 	SDL_Renderer* m_pRenderer;
-	
-
-
 	SDL_Texture* m_pTexture;
 	SDL_Rect m_sourceRectangle;
 	SDL_Rect m_destinationRectangle;
