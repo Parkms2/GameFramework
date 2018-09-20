@@ -25,9 +25,13 @@ void Game::render() {
 	SDL_RenderClear(m_pRenderer);
 	SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
 	SDL_RenderPresent(m_pRenderer);
+
+	//DrawSurface(screen, x, y, ch); 
+	//SDL_Flip(screen);
+
 }
 void Game::update() {
-	int pixel = 128, fps = 100, imageSum = 6;
+	int pixel = 128, fps = 10, imageSum = 6;
 	// pixel은 한 장면의 픽셀, fps은 장면당 호출시간(1000 = 1초) ,imageSum은 장면의 수
 	m_sourceRectangle.x = pixel * int(((SDL_GetTicks() / fps) % imageSum));
 }
@@ -36,13 +40,23 @@ void Game::handleEventes() {
 	if (SDL_PollEvent(&event)) {
 		switch (event.type) {
 		case SDL_QUIT:
-			m_bRunning = false;
-			break;
+			m_bRunning = false; break;
+		case SDL_KEYDOWN:
+			switch (event.key.keysym.sym) {
+			case SDLK_LEFT: // 왼쪽키 
+				x--; break;
+			case SDLK_RIGHT: // 오른쪽키 
+				x++; break;
+			case SDLK_UP: // 위쪽키 
+				y--; break;
+			case SDLK_DOWN: // 아래쪽키 
+				y++; break;
+			}
 		default:
 			break;
-		}
 	}
 }
+
 void Game::clean() {
 	std::cout << "cleaning game\n";
 	SDL_DestroyWindow(m_pWindow);

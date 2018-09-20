@@ -14,7 +14,8 @@ public:
 	void clean();
 	bool running() { return m_bRunning; }
 
-	
+	int x = 0, y = 0; //캐릭터의 시작 좌표
+
 private:
 	SDL_Window * m_pWindow;
 	SDL_Renderer* m_pRenderer;
