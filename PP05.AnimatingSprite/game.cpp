@@ -24,8 +24,6 @@ bool Game::init(const char*title, int xpos, int ypos, int width, int height, boo
 	return true;
 }
 void Game::render() {
-
-	
 	SDL_RenderClear(m_pRenderer);
 	SDL_RenderCopy(m_pRenderer, m_pTexture, &m_sourceRectangle, &m_destinationRectangle);
 	SDL_RenderPresent(m_pRenderer);
