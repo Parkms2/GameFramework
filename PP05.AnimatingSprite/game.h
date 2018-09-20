@@ -12,7 +12,9 @@ public:
 	void update();
 	void handleEventes();
 	void clean();
-	bool runnung() { return m_bRunning; }
+	bool running() { return m_bRunning; }
+
+
 
 private:
 	SDL_Window * m_pWindow;

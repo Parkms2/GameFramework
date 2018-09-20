@@ -6,17 +6,16 @@ bool Game::init(const char*title, int xpos, int ypos, int width, int height, boo
 		if (m_pWindow != 0) {
 			m_pRenderer = SDL_CreateRenderer(m_pWindow, -1, 0);
 		}
-		else return false;
+		m_bRunning = true;
 	}
+	else return false;
 	return true;
 }
 void Game::render() {
 	SDL_RenderClear(m_pRenderer);
 	SDL_RenderPresent(m_pRenderer);
 }
-void Game::update() {
 
-}
 void Game::handleEventes() {
 	SDL_Event event;
 	if (SDL_PollEvent(&event)) {
