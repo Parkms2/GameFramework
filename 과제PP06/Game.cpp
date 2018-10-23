@@ -12,17 +12,14 @@ bool Game::init(const char*title, int xpos, int ypos, int width, int height, boo
 			SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
 
 			if (!TheTextureManager::Instance()->load("Assets/animate-alpha.png", "animate", m_pRenderer)) return false;
+			if (!TheTextureManager::Instance()->load("Assets/basicRun.png", "animate2", m_pRenderer)) return false;
 
-			m_go = new GameObject();
-			m_player = new Player();
-			m_monster = new Enemy();
-			m_go->load(100, 100, 128, 82, "animate");
-			m_player->load(300, 300, 128, 82, "animate");
-			m_monster->load(0, 0, 128, 82, "animate");
-			m_gameObjects.push_back(m_go);
-			m_gameObjects.push_back(m_player);
+			m_monster = new Monster(); 
+			m_monster2 = new Monster();
+			m_monster->load(0, 0, 150, 100, "animate2");
+			m_monster2->load(0, 300, 150, 100, "animate2");
 			m_gameObjects.push_back(m_monster);
-
+			m_gameObjects.push_back(m_monster2);
 		}
 		else return false;
 	}
@@ -30,16 +27,17 @@ bool Game::init(const char*title, int xpos, int ypos, int width, int height, boo
 }
 void Game::render() {
 	SDL_RenderClear(m_pRenderer);
-	for (std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++)	{
+	for (std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++) {
 		m_gameObjects[i]->draw(m_pRenderer);
 	}
 	SDL_RenderPresent(m_pRenderer);
 }
 void Game::update() {
-	for (std::vector<GameObject*>::size_type i = 0;	i != m_gameObjects.size(); i++)	{
-		if(SDL_GetTicks() % 40 == 0) m_gameObjects[i]->update();
-	}
-
+	if (SDL_GetTicks() % 20 == 0) m_monster->update();
+	if (SDL_GetTicks() % 40 == 0) m_monster2->update();
+	//for (std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++) {
+	//	if (SDL_GetTicks() % 20 == 0) m_gameObjects[i]->update();
+	//}
 }
 void Game::handleEventes() {
 	SDL_Event event;

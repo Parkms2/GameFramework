@@ -2,6 +2,11 @@
 
 #include"SDL.h"
 #include <iostream>
+#include<vector>
+#include"TextureManager.h"
+#include"GameObject.h"
+#include"Player.h"
+#include"Monster.h"
 
 class Game {
 public:
@@ -14,13 +19,16 @@ public:
 	void clean();
 	bool running() { return m_bRunning; }
 
-	int x = 0, y = 0; //캐릭터의 시작 좌표
-
 private:
 	SDL_Window * m_pWindow;
 	SDL_Renderer* m_pRenderer;
-	SDL_Texture* m_pTexture;
-	SDL_Rect m_sourceRectangle;
-	SDL_Rect m_destinationRectangle;
 	bool m_bRunning;
+
+	int m_currentFrame;
+
+	std::vector<GameObject*> m_gameObjects;
+
+	GameObject* m_monster;
+	GameObject* m_monster2;
+
 };
