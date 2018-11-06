@@ -33,6 +33,9 @@
     <ClCompile Include="player.cpp" />
     <ClCompile Include="TextureManager.cpp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="ClassDiagram.cd" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
     <ProjectGuid>{DC218A72-1501-48C4-B6FD-A67549D4635E}</ProjectGuid>

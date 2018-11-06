@@ -1,6 +1,7 @@
 #include "game.h"
 #include<SDL_image.h>
 #include"TextureManager.h"
+Game* Game::s_pInstance = 0;
 
 bool Game::init(const char*title, int xpos, int ypos, int width, int height, bool fullscreen) {
 	if (SDL_Init(SDL_INIT_EVERYTHING) >= 0) {
@@ -11,7 +12,6 @@ bool Game::init(const char*title, int xpos, int ypos, int width, int height, boo
 			SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
 
 			if (!TheTextureManager::Instance()->load("Assets/animate-alpha.png", "animate", m_pRenderer)) return false;
-
 
 			m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 128, 82, "animate")));
 			m_gameObjects.push_back(new Enemy(new LoaderParams(300, 300, 128, 82, "animate")));
@@ -34,7 +34,6 @@ void Game::update() {
 	}
 
 }
-
 void Game::handleEventes() {
 	SDL_Event event;
 	if (SDL_PollEvent(&event)) {

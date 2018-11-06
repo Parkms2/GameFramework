@@ -1,20 +1,7 @@
 #include"game.h"
-#include<iostream>
-//Game* g_game = 0;
 
-int main(int argc, char* argv[]) {
-	/*g_game = new Game();
-	g_game->init("Chapter 1", 100, 100, 640, 480, false);
-
-	while (g_game->running()) {
-		g_game->handleEventes();
-		g_game->update();
-		g_game->render();
-	}
-
-	//SDL_Delay(5000);
-	g_game->clean();
-	return 0;*/
+int main(int argc, char* argv[])
+{
 	std::cout << "game init attempt...\n";
 	if (TheGame::Instance()->init("Chapter 1", 100, 100, 640, 480, false))
 	{
@@ -34,5 +21,4 @@ int main(int argc, char* argv[]) {
 	std::cout << "game closing...\n";
 	TheGame::Instance()->clean();
 	return 0;
-
 }
