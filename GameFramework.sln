@@ -31,6 +31,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PP11.AbstractClass", "PP11.
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PP12.Vector2D", "PP12.Vector2D\PP12.Vector2D.vcxproj", "{42448850-1E0A-4057-A822-2029327AC3D3}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PP13.KInputHandler", "PP13.KInputHandler\PP13.KInputHandler.vcxproj", "{8358D98E-957F-45C4-9320-B55BBD6D5B53}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -151,6 +153,14 @@ Global
 		{42448850-1E0A-4057-A822-2029327AC3D3}.Release|x64.Build.0 = Release|x64
 		{42448850-1E0A-4057-A822-2029327AC3D3}.Release|x86.ActiveCfg = Release|Win32
 		{42448850-1E0A-4057-A822-2029327AC3D3}.Release|x86.Build.0 = Release|Win32
+		{8358D98E-957F-45C4-9320-B55BBD6D5B53}.Debug|x64.ActiveCfg = Debug|x64
+		{8358D98E-957F-45C4-9320-B55BBD6D5B53}.Debug|x64.Build.0 = Debug|x64
+		{8358D98E-957F-45C4-9320-B55BBD6D5B53}.Debug|x86.ActiveCfg = Debug|Win32
+		{8358D98E-957F-45C4-9320-B55BBD6D5B53}.Debug|x86.Build.0 = Debug|Win32
+		{8358D98E-957F-45C4-9320-B55BBD6D5B53}.Release|x64.ActiveCfg = Release|x64
+		{8358D98E-957F-45C4-9320-B55BBD6D5B53}.Release|x64.Build.0 = Release|x64
+		{8358D98E-957F-45C4-9320-B55BBD6D5B53}.Release|x86.ActiveCfg = Release|Win32
+		{8358D98E-957F-45C4-9320-B55BBD6D5B53}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
