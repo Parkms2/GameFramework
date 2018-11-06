@@ -15,4 +15,3 @@ void Player::update()
 void Player::clean()
 {
 }
-

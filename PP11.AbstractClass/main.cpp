@@ -1,5 +1,7 @@
 #include"game.h"
 
+Game* g_game = 0;
+
 int main(int argc, char* argv[])
 {
 	std::cout << "game init attempt...\n";

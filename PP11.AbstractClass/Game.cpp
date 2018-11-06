@@ -12,9 +12,9 @@ bool Game::init(const char*title, int xpos, int ypos, int width, int height, boo
 			SDL_SetRenderDrawColor(m_pRenderer, 255, 0, 0, 255);
 
 			if (!TheTextureManager::Instance()->load("Assets/animate-alpha.png", "animate", m_pRenderer)) return false;
-
 			m_gameObjects.push_back(new Player(new LoaderParams(100, 100, 128, 82, "animate")));
 			m_gameObjects.push_back(new Enemy(new LoaderParams(300, 300, 128, 82, "animate")));
+			
 
 		}
 		else return false;
@@ -23,18 +23,18 @@ bool Game::init(const char*title, int xpos, int ypos, int width, int height, boo
 }
 void Game::render() {
 	SDL_RenderClear(m_pRenderer);
-	for (std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++) {
+	for (std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++)	{
 		m_gameObjects[i]->draw();
 	}
 	SDL_RenderPresent(m_pRenderer);
 }
 void Game::update() {
-	for (std::vector<GameObject*>::size_type i = 0; i != m_gameObjects.size(); i++) {
-		if (SDL_GetTicks() % 40 == 0) m_gameObjects[i]->update();
+	for (std::vector<GameObject*>::size_type i = 0;	i != m_gameObjects.size(); i++)	{
+		m_gameObjects[i]->update();
 	}
 
 }
-void Game::handleEventes() {
+void Game::handleEvents() {
 	SDL_Event event;
 	if (SDL_PollEvent(&event)) {
 		switch (event.type) {

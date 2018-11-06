@@ -4,8 +4,7 @@
 #include"TextureManager.h"
 #include"LoaderParams.h"
 
-class GameObject
-{
+class GameObject {
 public:
 	virtual void draw() = 0;
 	virtual void update() = 0;
