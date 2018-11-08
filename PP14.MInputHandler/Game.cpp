@@ -36,7 +36,6 @@ void Game::update() {
 }
 void Game::handleEvents() {
 	TheInputHandler::Instance()->update();
-
 }
 void Game::clean() {
 	std::cout << "cleaning game\n";
