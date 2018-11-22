@@ -9,6 +9,10 @@
 #include"Enemy.h"
 #include"InputHandler.h"
 
+#include"GameStateMachine.h"
+#include"MenuState.h"
+#include"PlayState.h"
+
 class Game {
 public:
 	Game() {}
@@ -29,6 +33,7 @@ public:
 		}
 		return s_pInstance;
 	}
+	GameStateMachine* m_pGameStateMachine;
 private:
 	SDL_Window * m_pWindow;
 	SDL_Renderer* m_pRenderer;
