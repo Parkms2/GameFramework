@@ -34,6 +34,8 @@ public:
 		return s_pInstance;
 	}
 	GameStateMachine* m_pGameStateMachine;
+	GameStateMachine* getStateMachine() { return m_pGameStateMachine; }
+
 private:
 	SDL_Window * m_pWindow;
 	SDL_Renderer* m_pRenderer;
