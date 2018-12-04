@@ -9,7 +9,7 @@ PlayState* PlayState::s_pInstance = 0;
 
 void PlayState::update()
 {
-	if (SDL_GetTicks() % 80 == 0) {
+	if (SDL_GetTicks() % 40 == 0) {
 		m_gameObjects.push_back(new Enemy(new LoaderParams(-200, 0, 128, 55, "helicopter2")));
 	}
 	for (int i = 0; i < m_gameObjects.size(); i++) {
