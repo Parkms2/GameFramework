@@ -14,9 +14,7 @@ void PlayState::update()
 	}
 	for (int i = 0; i < m_gameObjects.size(); i++) {
 		m_gameObjects[i]->update();
-	}
-	for (int i = 1; i < m_gameObjects.size(); i++) {
-		if (checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[i]))) {
+		if (i > 0 && checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[i]))) {
 			TheGame::Instance()->getStateMachine()->changeState(GameOverState::Instance());
 		}
 	}
