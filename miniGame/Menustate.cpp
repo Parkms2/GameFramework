@@ -41,7 +41,7 @@ bool MenuState::onEnter()
 }
 void MenuState::s_menuToPlay()
 {
-	TheGame::Instance()->getStateMachine()->changeState(new PlayState());
+	TheGame::Instance()->getStateMachine()->changeState(PlayState::Instance());
 }
 
 void MenuState::s_exitFromMenu()

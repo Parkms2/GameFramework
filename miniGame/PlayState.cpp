@@ -16,10 +16,24 @@ void PlayState::update() {
 	for (int i = 0; i < m_gameObjects.size(); i++) {
 		m_gameObjects[i]->update();
 		if (i > 0 && checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[i]))) {
-			//TheGame::Instance()->getStateMachine()->changeState(GameOverState::Instance());
+			if (myHeart == 0) {
+				TheGame::Instance()->getStateMachine()->changeState(GameOverState::Instance());
+			}
+			else if (!colli) {		//닿으면 1초간 반짝반짝거리면서 무적상태, 목숨수 -1
+				invin = SDL_GetTicks() + invinTime;
+				myHeart--;
+				if (m_heart.size() != 0)
+					m_heart.erase(m_heart.begin());
+				colli = true;
+			}
 		}
 		for (int i = 0; i < m_heart.size(); i++) {
 			m_heart[i]->update();
+			if (colli) {
+				if (invin < SDL_GetTicks()) {
+					colli = false;
+				}
+			}
 		}
 	}
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE)) {		//pause상태
@@ -50,6 +64,7 @@ bool PlayState::onEnter() {
 	m_heart.push_back(new Heart(new LoaderParams(1060, 36, 51, 44, "myHeart")));
 	m_heart.push_back(new Heart(new LoaderParams(1120, 36, 51, 44, "myHeart")));
 	m_heart.push_back(new Heart(new LoaderParams(1180, 36, 51, 44, "myHeart")));
+	myHeart = 4;
 	std::cout << "entering PlayState\n";
 	return true;
 
