@@ -2,7 +2,7 @@
 Enemy::Enemy(const LoaderParams* pParams) : SDLGameObject(pParams)
 {
 	setEnemyPosition = rand() % 820 - 100;
-	if (setEnemyPosition <= -45 || setEnemyPosition >= 720) {
+	if (setEnemyPosition <= -45 || setEnemyPosition >= 720) {	//x축이 양수일때 y가 보이지 않는 범위에서 생성
 		m_position.setX(rand() % 400);
 	}
 	m_position.setY(setEnemyPosition);

@@ -16,12 +16,12 @@ void PlayState::update() {	//onenter로 들어오면 sdl_geetticks로 시간 받
 	for (int i = 0; i < m_gameObjects.size(); i++) {
 		m_gameObjects[i]->update();
 		if (i > 0 && checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[i]))) {
-			if (myHeart == 0) {
-				TheGame::Instance()->getStateMachine()->changeState(GameOverState::Instance());
-			}
-			else if (!colli) {		//닿으면 1초간 반짝반짝거리면서 무적상태, 목숨수 -1
+			if (!colli) {		//닿으면 1초간 반짝반짝거리면서 무적상태, 목숨수 -1
 				invin = SDL_GetTicks() + invinTime;
 				myHeart--;
+				if (myHeart == 0) {
+					TheGame::Instance()->getStateMachine()->changeState(GameOverState::Instance());
+				}
 				if (m_heart.size() != 0)
 					m_heart.erase(m_heart.begin());
 				colli = true;
