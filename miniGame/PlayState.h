@@ -22,5 +22,8 @@ private:
 	static const std::string s_playID;
 	static PlayState* s_pInstance;
 	std::vector<GameObject*> m_gameObjects;
+	std::vector<GameObject*> m_heart;
+	int TimeLeft = 400;	//1000 -> 1√ 
+	int nextTime = 0;
 
 };

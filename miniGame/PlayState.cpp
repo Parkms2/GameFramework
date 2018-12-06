@@ -1,31 +1,37 @@
 ﻿#include "PlayState.h"
 #include"Player.h"
 #include"Enemy.h"
+#include"heart.h"
 #include"PauseState.h"
 #include"GameOverState.h"
 
 const std::string PlayState::s_playID = "PLAY";
 PlayState* PlayState::s_pInstance = 0;
 
-void PlayState::update()
-{
-	if (SDL_GetTicks() % 40 == 0) {
-		m_gameObjects.push_back(new Enemy(new LoaderParams(-200, 0, 128, 55, "helicopter2")));
-	}
+void PlayState::update() {
+	 if (SDL_GetTicks()  > nextTime)  {		//날라오는 적들
+            nextTime = SDL_GetTicks()  + TimeLeft;
+			m_gameObjects.push_back(new Enemy(new LoaderParams(-200, 0, 128, 55, "helicopter2")));
+        }
 	for (int i = 0; i < m_gameObjects.size(); i++) {
 		m_gameObjects[i]->update();
 		if (i > 0 && checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[i]))) {
-			TheGame::Instance()->getStateMachine()->changeState(GameOverState::Instance());
+			//TheGame::Instance()->getStateMachine()->changeState(GameOverState::Instance());
+		}
+		for (int i = 0; i < m_heart.size(); i++) {
+			m_heart[i]->update();
 		}
 	}
-	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE)) {
+	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE)) {		//pause상태
 		TheGame::Instance()->getStateMachine()->changeState(PauseState::Instance());
 	}
 }
-void PlayState::render()
-{
+void PlayState::render() {
 	for (int i = 0; i < m_gameObjects.size(); i++) {
 		m_gameObjects[i]->draw();
+	}
+	for (int i = 0; i < m_heart.size(); i++) {
+		m_heart[i]->draw();
 	}
 }
 bool PlayState::onEnter() {
@@ -35,10 +41,15 @@ bool PlayState::onEnter() {
 	if (!TheTextureManager::Instance()->load("assets/helicopter2.png", "helicopter2", TheGame::Instance()->getRenderer())) {
 		return false;
 	}
-
+	if (!TheTextureManager::Instance()->load("assets/heart.png", "myHeart", TheGame::Instance()->getRenderer())) {
+		return false;
+	}
 	m_gameObjects.push_back(new Player(new LoaderParams(1000, 400, 128, 55, "helicopter")));
-	m_gameObjects.push_back(new Enemy(new LoaderParams(-200, 0, 128, 55, "helicopter2")));
 
+	m_heart.push_back(new Heart(new LoaderParams(1000, 36, 51, 44, "myHeart")));
+	m_heart.push_back(new Heart(new LoaderParams(1060, 36, 51, 44, "myHeart")));
+	m_heart.push_back(new Heart(new LoaderParams(1120, 36, 51, 44, "myHeart")));
+	m_heart.push_back(new Heart(new LoaderParams(1180, 36, 51, 44, "myHeart")));
 	std::cout << "entering PlayState\n";
 	return true;
 
