@@ -8,7 +8,7 @@
 const std::string PlayState::s_playID = "PLAY";
 PlayState* PlayState::s_pInstance = 0;
 
-void PlayState::update() {
+void PlayState::update() {	//onenter로 들어오면 sdl_geetticks로 시간 받고 계속 SDL_GetTicks받으면서 시간 차이 체크하고 화면에 출력하기
 	 if (SDL_GetTicks()  > nextTime)  {		//날라오는 적들
             nextTime = SDL_GetTicks()  + TimeLeft;
 			m_gameObjects.push_back(new Enemy(new LoaderParams(-200, 0, 128, 55, "helicopter2")));
@@ -76,6 +76,10 @@ bool PlayState::onExit()
 		m_gameObjects[i]->clean();
 	}
 	m_gameObjects.clear();
+	for (int i = 0; i < m_heart.size(); i++) {
+		m_heart[i]->clean();
+	}
+	m_heart.clear();
 	TheTextureManager::Instance()->clearFromTextureMap("helicopter");
 	TheTextureManager::Instance()->clearFromTextureMap("helicopter2");
 	std::cout << "exiting PlayState\n";

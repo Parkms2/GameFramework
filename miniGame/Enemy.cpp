@@ -1,10 +1,13 @@
 #include"Enemy.h"
 Enemy::Enemy(const LoaderParams* pParams) : SDLGameObject(pParams)
 {
-	setEnemyPosition = rand() % (720 - this->m_height) + 100;	//enemy가 화면에 잘리지않고 나올수 있는 범위+ 목숨수가 나와야 하는 공간
+	setEnemyPosition = rand() % 820 - 100;
+	if (setEnemyPosition <= -45 || setEnemyPosition >= 720) {
+		m_position.setX(rand() % 400);
+	}
 	m_position.setY(setEnemyPosition);
-	m_velocity.setX(15);
-	m_velocity.setY(0);
+	m_velocity.setX(20);
+	m_velocity.setY(rand() % 15 - 8);
 }
 void Enemy::draw()
 {
