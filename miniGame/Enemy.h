@@ -9,7 +9,7 @@ public:
 	virtual void draw();
 	virtual void update();
 	virtual void clean();
-
+	int die;
 	int setEnemyPosition;
 private:
 	void handleInput();

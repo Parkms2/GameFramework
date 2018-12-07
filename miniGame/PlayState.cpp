@@ -15,6 +15,9 @@ void PlayState::update() {	//onenter로 들어오면 sdl_geetticks로 시간 받
         }
 	for (int i = 0; i < m_gameObjects.size(); i++) {
 		m_gameObjects[i]->update();
+		if (i != 0 && SDL_GetTicks() > dynamic_cast<Enemy*>(m_gameObjects[i])->die) {	//enemy가 생성후 2초후(화면밖으로 나가면) 지움
+			m_gameObjects.erase(m_gameObjects.begin() + i);
+		}
 		if (i > 0 && checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[i]))) {
 			if (!colli) {		//닿으면 1초간 반짝반짝거리면서 무적상태, 목숨수 -1
 				invin = SDL_GetTicks() + invinTime;
