@@ -4,11 +4,15 @@
 #include"heart.h"
 #include"PauseState.h"
 #include"GameOverState.h"
+#include"background.h"
 
 const std::string PlayState::s_playID = "PLAY";
 PlayState* PlayState::s_pInstance = 0;
 
 void PlayState::update() {	//onenter로 들어오면 sdl_geetticks로 시간 받고 계속 SDL_GetTicks받으면서 시간 차이 체크하고 화면에 출력하기
+	for (int i = 0; i < m_back.size(); i++) {
+		m_back[i]->update();
+	}
 	 if (SDL_GetTicks()  > nextTime)  {		//날라오는 적들
             nextTime = SDL_GetTicks()  + TimeLeft;
 			m_gameObjects.push_back(new Enemy(new LoaderParams(-200, 0, 128, 55, "helicopter2")));
@@ -44,6 +48,9 @@ void PlayState::update() {	//onenter로 들어오면 sdl_geetticks로 시간 받
 	}
 }
 void PlayState::render() {
+	for (int i = 0; i < m_back.size(); i++) {
+		m_back[i]->draw();
+	}
 	for (int i = 0; i < m_gameObjects.size(); i++) {
 		m_gameObjects[i]->draw();
 	}
@@ -61,6 +68,9 @@ bool PlayState::onEnter() {
 	if (!TheTextureManager::Instance()->load("assets/heart.png", "myHeart", TheGame::Instance()->getRenderer())) {
 		return false;
 	}
+	if (!TheTextureManager::Instance()->backLoad("assets/bg1.png", "stage1Back", TheGame::Instance()->getRenderer())) {
+		return false;
+	}
 	m_gameObjects.push_back(new Player(new LoaderParams(1000, 400, 128, 55, "helicopter")));
 
 	m_heart.push_back(new Heart(new LoaderParams(1000, 36, 51, 44, "myHeart")));
@@ -68,6 +78,9 @@ bool PlayState::onEnter() {
 	m_heart.push_back(new Heart(new LoaderParams(1120, 36, 51, 44, "myHeart")));
 	m_heart.push_back(new Heart(new LoaderParams(1180, 36, 51, 44, "myHeart")));
 	myHeart = 4;
+
+	m_back.push_back(new Background(new LoaderParams(0, 0, 1648, 720, "stage1Back")));
+	m_back.push_back(new Background(new LoaderParams(1648, 0, 1648, 720, "stage1Back")));
 	std::cout << "entering PlayState\n";
 	return true;
 

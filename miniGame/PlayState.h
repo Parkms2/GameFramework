@@ -24,6 +24,7 @@ private:
 	static PlayState* s_pInstance;
 	std::vector<GameObject*> m_gameObjects;
 	std::vector<GameObject*> m_heart;
+	std::vector<GameObject*> m_back;
 	int TimeLeft = 250;	//1000 -> 1초
 	int invinTime = 1700;	//1.7초 무적
 	int nextTime = 0;			//다음 적이 나오는 시간 (현재시간 + TimeLeft 로 조절)
