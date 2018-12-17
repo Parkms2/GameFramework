@@ -17,6 +17,8 @@ public:
 		}
 		return s_pInstance;
 	}
+	bool pause = false;
+	SDL_Surface* sshot;
 private:
 	static void s_pauseToMain();
 	static void s_resumePlay();

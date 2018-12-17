@@ -22,6 +22,11 @@ void GameStateMachine::changeState(GameState *pState)
 		m_currentState->onEnter();
 	}
 }
+void GameStateMachine::PopupState(GameState *pState) {
+	if (pState != NULL) {
+		pState->onEnter();
+	}
+}
 void GameStateMachine::update()
 {
 	if (m_currentState != NULL)

@@ -69,6 +69,9 @@
     <ClCompile Include="Background.cpp">
       <Filter>bg</Filter>
     </ClCompile>
+    <ClCompile Include="blur.cpp">
+      <Filter>소스 파일</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="SDLGameObject.h">
@@ -127,6 +130,9 @@
     </ClInclude>
     <ClInclude Include="background.h">
       <Filter>bg</Filter>
+    </ClInclude>
+    <ClInclude Include="blur.h">
+      <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

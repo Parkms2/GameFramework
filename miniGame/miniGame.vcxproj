@@ -81,7 +81,7 @@
       <ConformanceMode>true</ConformanceMode>
     </ClCompile>
     <Link>
-      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalDependencies>SDL2.lib;SDL2main.lib;SDL2_image.lib;SDL2_ttf.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <SubSystem>Windows</SubSystem>
     </Link>
   </ItemDefinitionGroup>
@@ -124,6 +124,7 @@
   <ItemGroup>
     <ClCompile Include="AnimatedGraphic.cpp" />
     <ClCompile Include="Background.cpp" />
+    <ClCompile Include="blur.cpp" />
     <ClCompile Include="Enemy.cpp" />
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="GameObject.cpp" />
@@ -143,6 +144,7 @@
   <ItemGroup>
     <ClInclude Include="AnimatedGraphic.h" />
     <ClInclude Include="background.h" />
+    <ClInclude Include="blur.h" />
     <ClInclude Include="Enemy.h" />
     <ClInclude Include="Game.h" />
     <ClInclude Include="GameObject.h" />

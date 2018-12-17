@@ -1,8 +1,6 @@
 #include"InputHandler.h"
 
 InputHandler* InputHandler::s_pInstance = 0;
-Vector2D* m_mousePosition = new Vector2D(0, 0);
-
 InputHandler::InputHandler() {
 	m_mousePosition = new Vector2D(0, 0);
 	for (int i = 0; i < 3; i++) {
@@ -62,6 +60,7 @@ void InputHandler::onMouseMove(SDL_Event event) {
 	m_mousePosition->setX(event.motion.x);
 	m_mousePosition->setY(event.motion.y);
 }
+
 void InputHandler::onMouseButtonDown(SDL_Event event) {
 	if (event.button.button == SDL_BUTTON_LEFT) {
 		m_mouseButtonStates[LEFT] = true;

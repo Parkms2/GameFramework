@@ -10,28 +10,33 @@ const std::string PlayState::s_playID = "PLAY";
 PlayState* PlayState::s_pInstance = 0;
 
 void PlayState::update() {	//onenter로 들어오면 sdl_geetticks로 시간 받고 계속 SDL_GetTicks받으면서 시간 차이 체크하고 화면에 출력하기
-	for (int i = 0; i < m_back.size(); i++) {
-		m_back[i]->update();
+	if (PauseState::Instance()->pause) {
+		PauseState::Instance()->update();
 	}
-	 if (SDL_GetTicks()  > nextTime)  {		//날라오는 적들
-            nextTime = SDL_GetTicks()  + TimeLeft;
-			m_gameObjects.push_back(new Enemy(new LoaderParams(-200, 0, 128, 55, "helicopter2")));
-        }
-	for (int i = 0; i < m_gameObjects.size(); i++) {
-		m_gameObjects[i]->update();
-		if (i != 0 && SDL_GetTicks() > dynamic_cast<Enemy*>(m_gameObjects[i])->die) {	//enemy가 생성후 2초후(화면밖으로 나가면) 지움
-			m_gameObjects.erase(m_gameObjects.begin() + i);
+	else {
+		for (int i = 0; i < m_back.size(); i++) {
+			m_back[i]->update();
 		}
-		if (i > 0 && checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[i]))) {
-			if (!colli) {		//닿으면 1초간 반짝반짝거리면서 무적상태, 목숨수 -1
-				invin = SDL_GetTicks() + invinTime;
-				myHeart--;
-				if (myHeart == 0) {
-					TheGame::Instance()->getStateMachine()->changeState(GameOverState::Instance());
+		if (SDL_GetTicks() > nextTime) {		//날라오는 적들
+			nextTime = SDL_GetTicks() + TimeLeft;
+			m_gameObjects.push_back(new Enemy(new LoaderParams(-200, 0, 128, 55, "helicopter2")));
+		}
+		for (int i = 0; i < m_gameObjects.size(); i++) {
+			m_gameObjects[i]->update();
+			if (i != 0 && SDL_GetTicks() > dynamic_cast<Enemy*>(m_gameObjects[i])->die) {	//enemy가 생성후 2초후(화면밖으로 나가면) 지움
+				m_gameObjects.erase(m_gameObjects.begin() + i);
+			}
+			if (i > 0 && checkCollision(dynamic_cast<SDLGameObject*>(m_gameObjects[0]), dynamic_cast<SDLGameObject*>(m_gameObjects[i]))) {
+				if (!colli) {		//닿으면 1초간 반짝반짝거리면서 무적상태, 목숨수 -1
+					invin = SDL_GetTicks() + invinTime;
+					myHeart--;
+					if (myHeart == 0) {
+						TheGame::Instance()->getStateMachine()->changeState(GameOverState::Instance());
+					}
+					if (m_heart.size() != 0)
+						m_heart.erase(m_heart.begin());
+					colli = true;
 				}
-				if (m_heart.size() != 0)
-					m_heart.erase(m_heart.begin());
-				colli = true;
 			}
 		}
 		for (int i = 0; i < m_heart.size(); i++) {
@@ -44,18 +49,23 @@ void PlayState::update() {	//onenter로 들어오면 sdl_geetticks로 시간 받
 		}
 	}
 	if (TheInputHandler::Instance()->isKeyDown(SDL_SCANCODE_ESCAPE)) {		//pause상태
-		TheGame::Instance()->getStateMachine()->changeState(PauseState::Instance());
+		TheGame::Instance()->getStateMachine()->PopupState(PauseState::Instance());
 	}
 }
 void PlayState::render() {
-	for (int i = 0; i < m_back.size(); i++) {
-		m_back[i]->draw();
+	if (PauseState::Instance()->pause) {
+		PauseState::Instance()->render();
 	}
-	for (int i = 0; i < m_gameObjects.size(); i++) {
-		m_gameObjects[i]->draw();
-	}
-	for (int i = 0; i < m_heart.size(); i++) {
-		m_heart[i]->draw();
+	else {
+		for (int i = 0; i < m_back.size(); i++) {
+			m_back[i]->draw();
+		}
+		for (int i = 0; i < m_gameObjects.size(); i++) {
+			m_gameObjects[i]->draw();
+		}
+		for (int i = 0; i < m_heart.size(); i++) {
+			m_heart[i]->draw();
+		}
 	}
 }
 bool PlayState::onEnter() {

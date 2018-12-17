@@ -1,7 +1,6 @@
 #pragma once
 #include "GameState.h"
 #include"SDLGameObject.h"
-
 class PlayState : public GameState
 {
 public:
@@ -30,4 +29,6 @@ private:
 	int nextTime = 0;			//다음 적이 나오는 시간 (현재시간 + TimeLeft 로 조절)
 	int myHeart = 4;		//목숨수
 	int invin = 0;	//무적시간 체킹
+
+
 };

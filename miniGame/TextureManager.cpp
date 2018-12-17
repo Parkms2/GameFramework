@@ -26,6 +26,17 @@ bool TextureManager::backLoad(string fileName, string id, SDL_Renderer* pRendere
 	}
 	return false;
 }
+bool TextureManager::screenShotLoad(string id, SDL_Surface* screenShot, SDL_Renderer* pRenderer) {
+	if (screenShot == 0) return false;
+	SDL_Texture* pTexture = SDL_CreateTextureFromSurface(pRenderer, screenShot);
+	SDL_FreeSurface(screenShot);
+	SDL_SetTextureAlphaMod(pTexture, 170);
+	if (pTexture != 0) {
+		m_textureMap[id] = pTexture;
+		return true;
+	}
+	return false;
+}
 void TextureManager::draw(string id, int x, int y, int width, int height, int current, SDL_Renderer* pRenderer, SDL_RendererFlip flip) {
 	SDL_Rect srcRect;	//소스파일정보
 	SDL_Rect destRect;	//출력정보
